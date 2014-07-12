@@ -1,0 +1,27 @@
+# The client should not be able to access this directory, because this is not 
+# the public directory. However, if there is something wrong, the following 
+# rules will apply.
+
+#-------------------------------------------------------------------------------
+# Disable MultiViews
+#-------------------------------------------------------------------------------
+# 
+# With MultiViews enabled, if a browser requests index.html, and there is no 
+# file named as such, the web server will look for index.html.en, index.html.fr 
+# and so on, depending on the user's language preferences.
+# 
+Options -MultiViews
+
+
+#-------------------------------------------------------------------------------
+# Disable Indexes
+#-------------------------------------------------------------------------------
+# 
+# With Indexes enabled, if there is no default file in a directory like 
+# index.html, a directory index will be automatically generated.
+#
+Options -Indexes
+
+
+# Temporarily redirect to the public directory until the problem is solved.
+Redirect 302 . /public_html/

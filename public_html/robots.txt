@@ -1,0 +1,17 @@
+# The robots.txt file gives instructions about your site. It's useful for the 
+# so-called web crawlers.
+# 
+# There are two important considerations when using robots.txt:
+# - Crawlers can ignore robots.txt. Note that there are malware robots that 
+#   scan all around the web for security vulnerabilities.
+# - The robots.txt file is a publicly available file. Anyone can see what 
+#   sections of your server you don't want robots to use. Don't try to use 
+#   robots.txt to hide information.
+# 
+# Useful resources:
+# - http://www.robotstxt.org
+# - http://tool.motoricerca.info/robots-checker.phtml
+
+# The sitemap URL must be absolute.
+# Uncomment the following line if you have a sitemap.
+# Sitemap: http://example.com/sitemap.xml
