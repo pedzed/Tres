@@ -9,4 +9,4 @@ require_once '../app/init.php';
 if(Config::get('app/offline'))
     die('Sorry! The site is under maintenance.');
 
-$app = new App();
+App::init();

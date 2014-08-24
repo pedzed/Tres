@@ -14,7 +14,7 @@ namespace Tres\core\app {
      */
     final class App {
         
-        public function __construct(){
+        public static function init(){
             // Check if the app is compatible with the server environment.
             try {
                 $compatChecker = new CompatibilityChecker();
