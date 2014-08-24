@@ -17,8 +17,8 @@ namespace Tres\core {
          * Adds a style resource to the application.
          * 
          * @param  string $file     The path to the file.
-         * @param  bool   $relative Whether to start from the STYLE_DIR or not.
-         * @return string           Generated link tag.
+         * @param  bool   $relative Whether to start from the default directory or not.
+         * @return string           Generated tag.
          */
         public function getStyle($file, $relative = true){
             $this->_path = ($relative) ? STYLE_DIR.'/'.$file : $file;
@@ -31,8 +31,8 @@ namespace Tres\core {
          * Adds a script resource to the application.
          * 
          * @param  string $file     The path to the file.
-         * @param  bool   $relative Whether to start from the SCRIPT_DIR or not.
-         * @return string           Generated script tags.
+         * @param  bool   $relative Whether to start from the default directory or not.
+         * @return string           Generated tag.
          */
         public function getScript($file, $relative = true){
             $this->_path = ($relative) ? SCRIPT_DIR.'/'.$file : $file;
@@ -45,8 +45,8 @@ namespace Tres\core {
          * Adds a favicon to the site.
          * 
          * @param  string $file     The path to the file.
-         * @param  bool   $relative Whether to start from the PUBLIC_DIR or not.
-         * @return string           Generated link tag.
+         * @param  bool   $relative Whether to start from the default directory or not.
+         * @return string           Generated tag.
          */
         public function getFavicon($file, $relative = true){
             $this->_path = ($relative) ? PUBLIC_DIR.'/'.$file : $file;
@@ -64,12 +64,11 @@ namespace Tres\core {
                     break;
             }
             
-            
             return  '<link rel="icon" type="'.$type.'" href="'.
                         XSSHTML::specialchars($this->_path).
                     '" />'.PHP_EOL;
         }
-        
+    
     }
     
 }

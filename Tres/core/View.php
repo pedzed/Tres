@@ -38,6 +38,7 @@ namespace Tres\core {
             ob_end_clean();
             
             self::_processVariables($_viewData);
+            self::_processConstants();
             self::_processFunctions();
             
             //echo pd(HTML::specialchars(self::$_content));
@@ -83,13 +84,29 @@ namespace Tres\core {
             }, self::$_content);
         }
         
+        protected static function _processConstants(){
+            $pattern = '#{{ ([A-Z_]+) }}#';
+            
+            self::$_content = preg_replace_callback($pattern, function($const){
+                if(defined($const[1])){
+                    return constant($const[1]);
+                } else {
+                    throw new ViewException('No constant "'.$const[1].'" defined.');
+                }
+            }, self::$_content);
+        }
+        
         protected static function _processFunctions(){
             $pattern = '#{{ ((\w+)\((.*?)\));? }}#';
             
             self::$_content = preg_replace_callback($pattern, function($func){
-                //pd($func);
+                // Experimental
+                $params = str_replace('\'', '', $func[3]);
+                $params = explode(',', $params);
+                $params = array_map('trim', $params);
+                
                 if(function_exists($func[2])){
-                    return call_user_func($func[2], $func[3]);
+                    return call_user_func_array($func[2], $params);
                 } else {
                     throw new ViewException('No function "'.$func[1].'" exists.');
                 }

@@ -4,7 +4,7 @@
         <meta charset="utf8" />
         <title>Home - {{ $appName }}</title>
         
-        <?= style('main.css'); ?>
+        {{ style('main.css') }}
         {{ favicon('favicon.ico') }}
         
         <!--[if lt IE 9]>
@@ -21,7 +21,7 @@
                 <p>Yet another micro MVC framework. :)</p>
                 
                 <a href="#" class="tres-logo">
-                    <img src="<?php echo IMAGE_DIR; ?>/tres-logo.png"
+                    <img src="{{ IMAGE_DIR }}/tres-logo.png"
                          width="200"
                          height="200"
                          alt="Tres logo"

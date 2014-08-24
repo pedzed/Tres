@@ -3,14 +3,14 @@
 use Tres\core\Asset;
 
 /**
- * A shortcut to include CSS stylesheets to the application.
+ * A shortcut to add a style resource to the application.
  */
 function style($file, $relative = true){
     return (new Asset())->getStyle($file, $relative);
 }
 
 /**
- * A shortcut to include JavaScript scripts to the application.
+ * A shortcut to add a JavaScript resource to the application.
  */
 function script($file, $relative = true){
     return (new Asset())->getScript($file, $relative);
