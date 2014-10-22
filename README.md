@@ -1,4 +1,4 @@
-# Tres 0.3 (beta)
+# Tres 0.4 (beta)
 
 Tres is a well organized, powerful and highly extensible MVC framework for the 
 PHP programming language.
@@ -24,22 +24,24 @@ having to know much about PHP, or have to dig into the code.
 
 
 *Note that the RewriteBase of the htaccess file in the public directory might 
-have to be changed.
+have to be changed.*
 
 
-## Quick start
-### Change/add configurations
+## Quick guide
+### Configurations
+#### Edit existing config
 1. Go to the /app/config/ directory.
-2. Edit the necessary configurations.
+2. Edit the desired configurations.
 
-If you want to create a new configuration file, go to /Tres/core/Config.php and 
-simply add your file like so:
+#### Add new config
+If you want to create a new configuration file, go to /app/init.php and 
+add your file like the following.
 ```php
-'my_alias' => CONFIG_DIR.'/new-config-file.php',
+Config::add('my_alias', CONFIG_DIR.'/new-config-file.php'),
 ```
 
-
-### Setting up routes
+### Routing
+#### Setting up routes
 Open /app/routes.php and add your desired routes.
 
 Routes can start and end with a slash. It does not make a difference.
@@ -64,5 +66,6 @@ The following list of features is likely to be added in future updates.
 
 - Add template functionality, where layouts can be used for multiple pages.
 - Implement a mailing class.
+- Implement validator.
 - Implement file logger for error logging.
 - Add application install wizard.
