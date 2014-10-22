@@ -1,9 +1,9 @@
 <?php
 
-namespace app\controllers {
+namespace controllers {
     
-    use Tres\core\Config;
-    use Tres\core\View;
+    use packages\Tres\core\View;
+    use packages\Tres\config\Config;
     
     class ErrorNotFoundController extends BaseController {
         
@@ -13,9 +13,9 @@ namespace app\controllers {
         public function renderPage(){
             header('HTTP/1.0 404 Not Found');
             
-            View::make('errors/error-404', array(
-                'app_name' => Config::get('app/name'),
-            ));
+            View::make('errors/error-404', [
+                'appName' => Config::get('app/name'),
+            ]);
         }
         
     }

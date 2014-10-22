@@ -1,19 +1,17 @@
 <?php
 
-use Tres\core\SplClassLoader;
-use Tres\core\Config;
-use Tres\core\File;
+use packages\Tres\core\File;
+use packages\Tres\database\Config as DBConfig;
+use packages\Tres\config\Config;
 
-// Root paths for inclusion.
+// Paths for inclusion.
 define('ROOT', dirname(__DIR__));
-define('TRES_DIR', ROOT.'/Tres');
-
 define('APP_DIR', ROOT.'/app');
+define('PACKAGE_DIR', APP_DIR.'/packages');
 define('CONFIG_DIR', APP_DIR.'/config');
 define('CONTROLLER_DIR', APP_DIR.'/controllers');
 define('MODEL_DIR', APP_DIR.'/models');
 define('VIEW_DIR', APP_DIR.'/views');
-
 define('PUBLIC_DIR',
     (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://'.
     $_SERVER['HTTP_HOST'].
@@ -27,17 +25,26 @@ define('IMAGE_DIR', PUBLIC_DIR.'/images');
 define('STYLE_DIR', PUBLIC_DIR.'/styles');
 define('SCRIPT_DIR', PUBLIC_DIR.'/scripts');
 
-// Autoload classes
-require_once(TRES_DIR.'/core/SplClassLoader.php');
+spl_autoload_register(function($className){
+    $class = str_replace('\\', '/', ROOT.'/app/'.$className.'.php');
+    
+    if(is_readable($class)){
+        require_once($class);
+    } else {
+        die('Class <b>'.$className.'</b> is not readable. Does it exist?');
+    }
+});
 
-$splClassLoader = new SplClassLoader();
-$splClassLoader->setIncludePath(ROOT);
-$splClassLoader->register();
+// Config set-up
+Config::add('app', CONFIG_DIR.'/app.php');
+Config::add('db', CONFIG_DIR.'/db.php');
+
+DBConfig::set(Config::get('db'));
 
 // Functions to load
-File::inc(TRES_DIR.'/functions/config.php');
-File::inc(TRES_DIR.'/functions/assets.php');
-File::inc(TRES_DIR.'/functions/quick-debug.php');
+File::inc(PACKAGE_DIR.'/Tres/functions/config.php');
+File::inc(PACKAGE_DIR.'/Tres/functions/assets.php');
+File::inc(PACKAGE_DIR.'/Tres/functions/quick-debug.php');
 
 date_default_timezone_set(Config::get('app/timezone'));
 

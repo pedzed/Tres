@@ -2,6 +2,8 @@
 
 return array(
     
+    'display_errors' => true,
+    
     /*
     |--------------------------------------------------------------------------
     | Default database connection

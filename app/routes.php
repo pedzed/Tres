@@ -1,6 +1,6 @@
 <?php
 
-use Tres\core\Route;
+use packages\Tres\core\Route;
 
 Route::add('/', array(
     'uses' => 'HomeController@renderPage',

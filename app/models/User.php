@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models {
+namespace models {
     
-    use Tres\core\database\DBObject;
+    use PDO;
+    use packages\Tres\database\DB;
     
     class User {
         
@@ -62,7 +63,7 @@ namespace app\models {
          */
         public function __construct($user){
             $this->_username = $user;
-            $this->_db = new DBObject();
+            $this->_db = new DB();
         }
         
         /**
@@ -71,10 +72,10 @@ namespace app\models {
          * @return bool
          */
         public function exists(){
-            $user = $this->_db->get('*')
-                              ->from('users')
+            //$user = $this->_db->query('SELECT `id` FROM `users` WHERE `username` = ?', $this->_username);
+            $user = $this->_db->get('users', 'id')
                               ->where('username', '=', $this->_username)
-                              ->fetch();
+                              ->exec();
             return ($user) ? true : false;
         }
         
@@ -85,10 +86,10 @@ namespace app\models {
          * @return array        The user data.
          */
         public function getData(){
-            $user = $this->_db->get('*')
-                              ->from('users')
+            $user = $this->_db->get('users')
                               ->where('username', '=', $this->_username)
-                              ->fetch();
+                              ->exec();
+            $user = $user->fetch(PDO::FETCH_OBJ);
             
             if($user){
                 $this->_firstname = $user->firstname;
@@ -97,7 +98,7 @@ namespace app\models {
                 $this->_email = $user->email;
                 $this->_modificationDate = $user->modification_date;
                 
-                return array(
+                return [
                     'id' => $user->id,
                     'firstname' => $this->_firstname,
                     'surname' => $this->_surname,
@@ -106,7 +107,7 @@ namespace app\models {
                     'email' => $this->_email,
                     'registration_date' => $user->registration_date,
                     'modification_date' => $this->_modificationDate
-                );
+                ];
             }
         }
         

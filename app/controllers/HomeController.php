@@ -1,18 +1,18 @@
 <?php
 
-namespace app\controllers {
+namespace controllers {
     
-    use Tres\core\app\Version;
-    use Tres\core\Config;
-    use Tres\core\View;
+    use packages\Tres\core\app\Version;
+    use packages\Tres\core\View;
+    use packages\Tres\config\Config;
     
     class HomeController extends BaseController {
         
         public function renderPage(){
-            View::make('home', array(
+            View::make('home', [
                 'appName' => Config::get('app/name'),
                 'tresVersion' => (new Version())->get()
-            ));
+            ]);
         }
         
     }

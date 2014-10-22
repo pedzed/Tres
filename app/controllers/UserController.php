@@ -1,11 +1,12 @@
 <?php
 
-namespace app\controllers {
+namespace controllers {
     
-    use Tres\core\Config;
-    use Tres\core\Redirect;
-    use Tres\core\View;
-    use app\models\User;
+    use packages\Tres\core\Redirect;
+    use packages\Tres\core\View;
+    use packages\Tres\config\Config;
+    
+    use models\User;
     
     class UserController extends BaseController {
         
@@ -22,18 +23,20 @@ namespace app\controllers {
          * @param array $data
          */
         public function __construct(array $data){
+            parent::__construct();
+            
             $this->_user = new User($data['username']);
             
             if(!$this->_user->exists()){
-                Redirect::route('error-404');
+                // 
             }
         }
         
         public function getProfile($user){
-            View::make('user-profile', array(
-                'app_name' => Config::get('app/name'),
-                'user_data' => $this->_user->getData(),
-            ));
+            View::make('user-profile', [
+                'appName' => Config::get('app/name'),
+                'userData' => $this->_user->getData(),
+            ]);
         }
         
     }

@@ -20,7 +20,7 @@ Options -Indexes
 
 
 RewriteEngine On
-RewriteBase /path/to/public_html/
+RewriteBase /GitHub/Tres/public_html/
 
 
 #-------------------------------------------------------------------------------
