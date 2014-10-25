@@ -4,6 +4,8 @@ namespace packages\Tres\core {
     
     use Exception;
     
+    use controllers\ControllerException;
+    
     use packages\Tres\security\XSS\HTML;
     use packages\Tres\config\Config;
     
