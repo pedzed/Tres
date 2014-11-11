@@ -2,7 +2,7 @@
 
 namespace controllers {
     
-    use packages\Tres\core\app\Version;
+    use packages\Tres\core\app\Version as TresVersion;
     use packages\Tres\core\View;
     use packages\Tres\config\Config;
     
@@ -11,7 +11,7 @@ namespace controllers {
         public function renderPage(){
             View::make('home', [
                 'appName' => Config::get('app/name'),
-                'tresVersion' => (new Version())->get()
+                'tresVersion' => TresVersion::get()
             ]);
         }
         
