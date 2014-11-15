@@ -20,7 +20,7 @@ namespace packages\Tres\core\app {
          * Typically introcudes new functionality, makes code better, or contains
          * general updates and improvements. This SHOULD be backwards compatible.
          */
-        const MINOR_VERSION = 4;
+        const MINOR_VERSION = 5;
         
         /**
          * Patch version.
