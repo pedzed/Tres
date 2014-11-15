@@ -5,8 +5,8 @@ namespace packages\Tres\router {
     use Exception;
     use packages\Tres\router\Config;
     
-    class HTTPRouteException extends Exception {}
-    class RouteException extends Exception {}
+    class HTTPRouteException extends Exception implements ExceptionInterface {}
+    class RouteException extends Exception implements ExceptionInterface {}
     
     class Route {
         
@@ -34,7 +34,7 @@ namespace packages\Tres\router {
         /**
          * The HTTP request.
          * 
-         * @var array
+         * @var string
          */
         protected static $_request = '';
         
@@ -49,12 +49,22 @@ namespace packages\Tres\router {
         ];
         
         /**
-         * The route actions.
+         * The route options.
          * 
          * @var array
          */
-        protected static $_actions = [];
+        protected static $_options = [];
         
+        /**
+         * The route key for the Not Found route.
+         */
+        const NOT_FOUND = 'error_404';
+        
+        /**
+         * Sets the config.
+         * 
+         * @param Config $config
+         */
         public static function setConfig(Config $config){
             self::$_config = $config->get();
         }
@@ -62,32 +72,41 @@ namespace packages\Tres\router {
         /**
          * Registers a route with a GET request.
          * 
-         * @param string         $route  The route path.
-         * @param callable|array $action The action.
+         * @param string         $route   The route path.
+         * @param callable|array $options The route options.
          */
-        public static function get($route, $action){
-            self::register('GET', $route, $action);
+        public static function get($route, $options){
+            self::register('GET', $route, $options);
         }
         
         /**
          * Registers a route with a POST request.
          * 
-         * @param string         $route  The route path.
-         * @param callable|array $action The action.
+         * @param string         $route   The route path.
+         * @param callable|array $options The route options.
          */
-        public static function post($route, $action){
-            self::register('POST', $route, $action);
+        public static function post($route, $options){
+            self::register('POST', $route, $options);
+        }
+        
+        /**
+         * Registers the Not Found route.
+         * 
+         * @param  callable|array $options The route options.
+         */
+        public static function notFound($options){
+            self::register('GET', self::NOT_FOUND, $options);
         }
         
         /**
          * Registers a route.
          * 
          * @param  string         $request The HTTP request.
-         * @param  string         $route   The route path.
-         * @param  callable|array $action  The route action.
+         * @param  string|int     $route   The route path.
+         * @param  callable|array $options The route options.
          */
-        public static function register($request, $route, $action){
-            if(!is_string($route)){
+        public static function register($request, $route, $options){
+            if($route !== self::NOT_FOUND && !is_string($route)){
                 throw new RouteException('Route path must be a string.');
             }
             
@@ -98,9 +117,19 @@ namespace packages\Tres\router {
                     throw new HTTPRouteException('The '.$request.' HTTP request is not supported.');
                 }
                 
-                self::$_routes[] = $route;
-                self::$_requests[] = $request;
-                self::$_actions[] = $action;
+                switch($route){
+                    case self::NOT_FOUND:
+                        self::$_routes[self::NOT_FOUND] = str_replace('_', '-', self::NOT_FOUND);
+                        self::$_requests[self::NOT_FOUND] = $request;
+                        self::$_options[self::NOT_FOUND] = $options;
+                    break;
+                    
+                    default:
+                        self::$_routes[] = $route;
+                        self::$_requests[] = $request;
+                        self::$_options[] = $options;
+                    break;
+                }
             }
         }
         
@@ -142,13 +171,7 @@ namespace packages\Tres\router {
                 foreach($matchedRoutes as $route){
                     $routeMatched = self::_run($route);
                 }
-                
-                if($routeMatched){
-                    return true;
-                }
-            } else {
-                // Dynamic URL
-                
+            } else { // Dynamic URL
                 $splitURI = explode('/', trim($uri, '/'));
                 
                 foreach(self::$_routes as $routeKey => $route){
@@ -162,15 +185,21 @@ namespace packages\Tres\router {
                     if($args = self::_getArgs($splitRoute, $splitURI)){
                         $routeMatched = self::_run($routeKey, $args);
                     }
-                    
-                    if($routeMatched){
-                        return true;
-                    }
                 }
             }
             
-            // TODO: Change to error 404.
-            throw new RouteException('Something went wrong.');
+            if(!$routeMatched){
+                if(!isset(self::$_routes[self::NOT_FOUND])){
+                    self::notFound(function(){
+                        header('HTTP/1.0 404 Not Found');
+                        echo '<h1>Error 404 - Not Found</h1><p>The page could not be found.</p>';
+                    });
+                }
+                
+                self::_run(self::NOT_FOUND);
+            }
+            
+            return $routeMatched;
         }
         
         /**
@@ -182,8 +211,8 @@ namespace packages\Tres\router {
          */
         public static function _run($routeKey, $args = []){
             if(self::$_requests[$routeKey] === self::$_request){
-                if(is_array(self::$_actions[$routeKey])){
-                    extract(self::$_actions[$routeKey]);
+                if(is_array(self::$_options[$routeKey])){
+                    extract(self::$_options[$routeKey]);
                     
                     if(isset($controller, $method)){
                         $controllerName = $controller;
@@ -209,17 +238,42 @@ namespace packages\Tres\router {
                         ], $args);
                         
                         return true;
-                    } else {
-                        throw new RouteException('Routes require at least a controller and a method.');
+                    } else if(isset($controller)){
+                        throw new RouteException('The "'.$controller.'" controller requires a method.');
+                    } else if(isset($method)){
+                        throw new RouteException('The "'.$method.'" method requires a controller.');
+                    } else { // No controller/method found. Search for callables.
+                        call_user_func_array(self::$_options[$routeKey][0], $args);
+                        
+                        return true;
                     }
-                } else if(is_callable(self::$_actions[$routeKey])){
-                    call_user_func_array(self::$_actions[$routeKey], $args);
+                } else if(is_callable(self::$_options[$routeKey])){
+                    call_user_func_array(self::$_options[$routeKey], $args);
                     
                     return true;
                 } else {
                     throw new RouteException('Second argument is not an array, nor a callback.');
                 }
             }
+        }
+        
+        /**
+         * Gets a list of routes including its request and options.
+         * 
+         * @return array
+         */
+        public static function getList(){
+            $list = [];
+            
+            foreach(self::$_routes as $k => $route){
+                $list[$k] = [
+                    'route' => $route,
+                    'request' => self::$_requests[$k],
+                    'options' => self::$_options[$k]
+                ];
+            }
+            
+            return $list;
         }
         
         /**
