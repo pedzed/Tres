@@ -19,7 +19,7 @@ having to know much about PHP, or have to dig into the code.
 ## Installation
 1. Download the files and extract it to your web server.
 2. If you are using this in a production environment, be sure that the
-   "public_html" directory is the root directory.
+   PUBLIC_URL points to the root of your domain name.
    So http://example.com/ should load /public_html/index.php
 
 
@@ -44,28 +44,27 @@ Config::add('my_alias', CONFIG_DIR.'/new-config-file.php'),
 #### Setting up routes
 Open /app/routes.php and add your desired routes.
 
-Routes can start and end with a slash. It does not make a difference.
+Routes may start and end with a slash. It does not make a difference.
 
 Example routes:
 ```php
-$route->add('path/to/route', array(
-    'uses' => 'MyController@controllerMethod'
-));
-```
+<?php
+Route::get('/', function(){
+    echo 'HOME!';
+});
 
-```php
-$route->add('users/:username', array(
-    'uses' => 'User@getProfile'
-));
+Route::get('/blog/posts/:id/', [
+    'controller' => 'PostController',
+    'method' => 'getPost'
+]);
 ```
-*Note that parameters like ":username" are all required. If you want to have 
-them optional, you will have to create a new route for each.*
+*Note that adding an argument like ":id" makes it mandatory. If you want to have 
+them optional, you will have to create a new route without the argument.*
 
 ## To-do
 The following list of features is likely to be added in future updates.
 
 - Add template functionality, where layouts can be used for multiple pages.
-- Implement a mailing class.
 - Implement validator.
 - Implement file logger for error logging.
 - Add application install wizard.
