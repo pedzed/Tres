@@ -13,18 +13,18 @@ define('MODEL_DIR', APP_DIR.'/models');
 define('VIEW_DIR', APP_DIR.'/views');
 define('PUBLIC_DIR', ROOT.'/public_html');
 
-define('PUBLIC_URL', ROOT.
+define('PUBLIC_URL', 
     (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://'.
     $_SERVER['HTTP_HOST'].
     str_replace(
         $_SERVER['DOCUMENT_ROOT'],
         '',
-        str_replace('\\', '/', ROOT).'/public_html'
+        str_replace('\\', '/', PUBLIC_DIR)
     )
 );
-define('IMAGE_URL', PUBLIC_DIR.'/images');
-define('STYLE_URL', PUBLIC_DIR.'/styles');
-define('SCRIPT_URL', PUBLIC_DIR.'/scripts');
+define('IMAGE_URL', PUBLIC_URL.'/images');
+define('STYLE_URL', PUBLIC_URL.'/styles');
+define('SCRIPT_URL', PUBLIC_URL.'/scripts');
 
 spl_autoload_register(function($className){
     $class = str_replace('\\', '/', ROOT.'/app/'.$className.'.php');

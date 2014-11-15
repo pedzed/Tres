@@ -21,7 +21,7 @@
                 <p>Yet another micro MVC framework. :)</p>
                 
                 <a href="#" class="tres-logo">
-                    <img src="{{ IMAGE_DIR }}/tres-logo.png"
+                    <img src="{{ IMAGE_URL }}/tres-logo.png"
                          width="200"
                          height="200"
                          alt="Tres logo"
