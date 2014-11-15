@@ -1,7 +1,5 @@
 <?php
 
-use packages\Tres\config\Config;
-
 /**
  * A shortcut to get the requested configuration by using the 
  * "root/branch/leaf" notation.

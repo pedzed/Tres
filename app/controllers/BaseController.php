@@ -2,10 +2,9 @@
 
 namespace controllers {
     
+    use Config;
     use Exception;
-    
-    use packages\Tres\core\View;
-    use packages\Tres\config\Config;
+    use View;
     
     class ControllerException extends Exception {}
     

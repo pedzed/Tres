@@ -1,19 +1,25 @@
 <?php
 
-use packages\Tres\core\Route;
+Route::get('/', [
+    'controller' => 'HomeController',
+    'method' => 'renderPage',
+    'alias' => 'home'
+]);
 
-Route::add('/', array(
-    'uses' => 'HomeController@renderPage',
-    'as' => 'home'
-));
+Route::get('/info', [
+    'alias' => 'info',
+    function(){
+        echo '<h1>INFO!</h1>';
+    }
+]);
 
-Route::add('/users/:username/', array(
-    'uses' => 'UserController@getProfile',
-    'as' => 'profile-page'
-));
+Route::get('/users/:username/', [
+    'controller' => 'UserController',
+    'method' => 'getProfile'
+]);
 
-// Errors
-Route::add('error-404/', array(
-    'uses' => 'ErrorNotFoundController@renderPage',
-    'as' => 'error-404'
-));
+Route::notFound([
+    'controller' => 'ErrorNotFoundController',
+    'method' => 'renderPage',
+    'alias' => 'error-404'
+]);

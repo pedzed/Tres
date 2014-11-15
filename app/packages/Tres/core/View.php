@@ -2,12 +2,9 @@
 
 namespace packages\Tres\core {
     
+    use Config;
     use Exception;
-    
-    use controllers\ControllerException;
-    
     use packages\Tres\security\XSS\HTML;
-    use packages\Tres\config\Config;
     
     class ViewException extends Exception {}
     
@@ -43,7 +40,6 @@ namespace packages\Tres\core {
             self::_processConstants();
             self::_processFunctions();
             
-            //echo pd(HTML::specialchars(self::$_content));
             echo self::$_content;
         }
         
@@ -55,9 +51,9 @@ namespace packages\Tres\core {
         protected static function _checkIsReadable($view){
             try {
                 if(!is_readable($view)){
-                    throw new ControllerException('View "'.$view.'" not found.');
+                    throw new ViewException('View "'.$view.'" not found.');
                 }
-            } catch(ControllerException $e){
+            } catch(ViewException $e){
                 // TODO: Log error to file.
                 // TODO: Move to separate file.
                 if(Config::get('app/debug') == 1){

@@ -63,10 +63,10 @@ namespace packages\Tres\router {
         /**
          * Sets the config.
          * 
-         * @param Config $config
+         * @param array $config
          */
-        public static function setConfig(Config $config){
-            self::$_config = $config->get();
+        public static function setConfig(array $config){
+            self::$_config = $config;
         }
         
         /**
@@ -219,7 +219,7 @@ namespace packages\Tres\router {
                         $controller = self::$_config['controllers']['namespace'].'\\'.$controllerName;
                         
                         $controllerFile  = self::$_config['controllers']['dir'].'/';
-                        $controllerFile .= str_replace('\\', '/', $controller);
+                        $controllerFile .= str_replace('\\', '/', $controllerName);
                         $controllerFile .= '.php';
                         
                         if(!is_readable($controllerFile)){

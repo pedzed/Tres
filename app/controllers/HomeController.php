@@ -2,9 +2,9 @@
 
 namespace controllers {
     
+    use Config;
+    use View;
     use packages\Tres\core\app\Version as TresVersion;
-    use packages\Tres\core\View;
-    use packages\Tres\config\Config;
     
     class HomeController extends BaseController {
         

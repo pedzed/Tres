@@ -2,10 +2,10 @@
 
 namespace packages\Tres\core\app {
     
-    use packages\Tres\core\Route;
+    use Config;
+    use Route;
     use packages\Tres\core\database\DBConnector;
     use packages\Tres\core\database\drivers;
-    use packages\Tres\config\Config;
     
     /**
      * The framework application class.
@@ -14,6 +14,9 @@ namespace packages\Tres\core\app {
      */
     final class App {
         
+        /**
+         * Initializes the application.
+         */
         public static function init(){
             // Check if the app is compatible with the server environment.
             try {
@@ -33,9 +36,10 @@ namespace packages\Tres\core\app {
             // Interaction with the Route class.
             try {
                 $path = (isset($_GET['path'])) ? rtrim($_GET['path'], '/') : '/';
-                Route::setPath($path);
+                
                 require_once(APP_DIR.'/routes.php');
-                Route::find();
+                
+                Route::dispatch();
             } catch(RouteException $e){
                 // TODO: Log error to file.
                 // TODO: Move to separate file

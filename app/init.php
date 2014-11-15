@@ -2,7 +2,6 @@
 
 use packages\Tres\core\File;
 use packages\Tres\database\Config as DBConfig;
-use packages\Tres\config\Config;
 
 // Paths for inclusion.
 define('ROOT', dirname(__DIR__));
@@ -12,7 +11,9 @@ define('CONFIG_DIR', APP_DIR.'/config');
 define('CONTROLLER_DIR', APP_DIR.'/controllers');
 define('MODEL_DIR', APP_DIR.'/models');
 define('VIEW_DIR', APP_DIR.'/views');
-define('PUBLIC_DIR',
+define('PUBLIC_DIR', ROOT.'/public_html');
+
+define('PUBLIC_URL', ROOT.
     (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://'.
     $_SERVER['HTTP_HOST'].
     str_replace(
@@ -21,9 +22,9 @@ define('PUBLIC_DIR',
         str_replace('\\', '/', ROOT).'/public_html'
     )
 );
-define('IMAGE_DIR', PUBLIC_DIR.'/images');
-define('STYLE_DIR', PUBLIC_DIR.'/styles');
-define('SCRIPT_DIR', PUBLIC_DIR.'/scripts');
+define('IMAGE_URL', PUBLIC_DIR.'/images');
+define('STYLE_URL', PUBLIC_DIR.'/styles');
+define('SCRIPT_URL', PUBLIC_DIR.'/scripts');
 
 spl_autoload_register(function($className){
     $class = str_replace('\\', '/', ROOT.'/app/'.$className.'.php');
@@ -31,14 +32,22 @@ spl_autoload_register(function($className){
     if(is_readable($class)){
         require_once($class);
     } else {
-        die('Class <b>'.$className.'</b> is not readable. Does it exist?');
+        die('Class <b>'.$className.'</b> is not readable. Does it exist?<br/>'.$class);
     }
 });
+
+// Class shortcuts
+class_alias('packages\Tres\config\Config', 'Config');
+class_alias('packages\Tres\router\Route', 'Route');
+class_alias('packages\Tres\router\URL', 'URL');
+class_alias('packages\Tres\core\View', 'View');
 
 // Config set-up
 Config::add('app', CONFIG_DIR.'/app.php');
 Config::add('db', CONFIG_DIR.'/db.php');
+Config::add('router', CONFIG_DIR.'/router.php');
 
+Route::setConfig(Config::get('router'));
 DBConfig::set(Config::get('db'));
 
 // Functions to load

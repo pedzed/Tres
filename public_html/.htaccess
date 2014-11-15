@@ -20,7 +20,7 @@ Options -Indexes
 
 
 RewriteEngine On
-RewriteBase /GitHub/Tres/public_html/
+RewriteBase /
 
 
 #-------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ RewriteBase /GitHub/Tres/public_html/
 #
 RewriteCond %{HTTP_HOST} ^www\.(.+)
 RewriteCond %{HTTPS}s/%1 ^(on(s)|offs)/(.+)
-    RewriteRule ^ http%2://%3%{REQUEST_URI} [R=301,L]
+    RewriteRule ^ http%2://%3%{REQUEST_URI} [R=302,L]
 
 
 #-------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ RewriteCond %{HTTPS}s/%1 ^(on(s)|offs)/(.+)
 # 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
-    RewriteRule ^(.+)$ $1/ [R=301,L]
+    RewriteRule ^(.+)$ $1/ [R=307,L]
 
 
 #-------------------------------------------------------------------------------
@@ -60,4 +60,4 @@ RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
-    RewriteRule ^(.+)$ index.php?path=$1 [QSA,L]
+    RewriteRule ^(.+)$ index.php?/$1 [QSA,L]

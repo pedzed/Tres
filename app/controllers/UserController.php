@@ -2,10 +2,8 @@
 
 namespace controllers {
     
-    use packages\Tres\core\Redirect;
-    use packages\Tres\core\View;
-    use packages\Tres\config\Config;
-    
+    use Config;
+    use View;
     use models\User;
     
     class UserController extends BaseController {

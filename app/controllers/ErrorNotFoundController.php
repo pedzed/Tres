@@ -2,13 +2,16 @@
 
 namespace controllers {
     
-    use packages\Tres\core\View;
-    use packages\Tres\config\Config;
+    use Config;
+    use View;
     
+    /**
+     * The "Not Found (404)" error controller.
+     */
     class ErrorNotFoundController extends BaseController {
         
         /**
-         * This is the default controller method.
+         * Renders the page.
          */
         public function renderPage(){
             header('HTTP/1.0 404 Not Found');
