@@ -1,4 +1,7 @@
-# Tres 0.4 (beta)
+# Tres Framework
+
+*Note: This is heavily in development. Codebase is unstable and might change
+at any time.*
 
 Tres is a well organized, powerful and highly extensible MVC framework for the 
 PHP programming language.
