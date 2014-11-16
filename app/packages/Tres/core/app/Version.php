@@ -29,7 +29,7 @@ namespace packages\Tres\core\app {
          * The patch version MUST be backwards compatible. Otherwise, it's a
          * minor update.
          */
-        const PATCH_VERSION = 0;
+        const PATCH_VERSION = 1;
         
         /**
          * Gets the framework version.
