@@ -6,10 +6,29 @@ Route::get('/', [
     'alias' => 'home'
 ]);
 
-Route::get('/info', [
-    'alias' => 'info',
+Route::get('/mail-test', [
+    'alias' => 'mail-test',
     function(){
-        echo '<h1>INFO!</h1>';
+        $mail = new Mail(new MailConnection());
+        
+        $mail->isHTML();
+        $mail->from = 'John Doe';
+        $mail->to = 'john@example.com';
+        $mail->subject = 'Test email!';
+        $mail->body = '<h1>Test email</h1><b>HTML</b> is supported.';
+        $mail->addHeader('X-IP-Address', $_SERVER['REMOTE_ADDR']);
+        
+        if($mail->send()){
+            ?>
+            <h1>Mail sent!</h1>
+            The mail has been sent.<br />
+            <?php
+        } else {
+            ?>
+            <h1>Uh oh!</h1>
+            An error occurred.<br />
+            <?php
+        }
     }
 ]);
 
