@@ -2,6 +2,7 @@
 
 use packages\Tres\core\File;
 use packages\Tres\database\Config as DBConfig;
+use packages\Tres\mailer\Config as MailConfig;
 
 // Paths for inclusion.
 define('ROOT', dirname(__DIR__));
@@ -38,18 +39,22 @@ spl_autoload_register(function($className){
 
 // Class shortcuts
 class_alias('packages\Tres\config\Config', 'Config');
+class_alias('packages\Tres\core\View', 'View');
+class_alias('packages\Tres\mailer\Mail', 'Mail');
+class_alias('packages\Tres\mailer\Connection', 'MailConnection');
 class_alias('packages\Tres\router\Route', 'Route');
 class_alias('packages\Tres\router\Redirect', 'Redirect');
 class_alias('packages\Tres\router\URL', 'URL');
-class_alias('packages\Tres\core\View', 'View');
 
 // Config set-up
 Config::add('app', CONFIG_DIR.'/app.php');
 Config::add('db', CONFIG_DIR.'/db.php');
 Config::add('router', CONFIG_DIR.'/router.php');
+Config::add('mailer', CONFIG_DIR.'/mailer.php');
 
-Route::setConfig(Config::get('router'));
 DBConfig::set(Config::get('db'));
+Route::setConfig(Config::get('router'));
+MailConfig::set(Config::get('mailer'));
 
 // Functions to load
 File::inc(PACKAGE_DIR.'/Tres/functions/config.php');
