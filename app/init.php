@@ -14,7 +14,7 @@ define('VIEW_DIR', APP_DIR.'/views');
 define('PUBLIC_DIR', ROOT.'/public_html');
 
 define('PUBLIC_URL', 
-    (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://'.
+    ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://').
     $_SERVER['HTTP_HOST'].
     str_replace(
         $_SERVER['DOCUMENT_ROOT'],
