@@ -1,14 +1,10 @@
 <?php
 
-namespace packages\Tres\core {
+namespace packages\Tres\router {
     
-    use Exception;
-    
-    use packages\Tres\core\URL;
-    use packages\Tres\config\Config;
-    
-    class RedirectException extends Exception {}
-    
+    /**
+     * Redirect class.
+     */
     class Redirect {
         
         // Prevents instantiation.
@@ -18,10 +14,10 @@ namespace packages\Tres\core {
         /**
          * Redirects and kills the page.
          * 
-         * @param string $url The path to redirect.
+         * @param string $uri The path to redirect.
          */
-        public static function to($url){
-            header('Location: '.$url);
+        public static function to($uri){
+            header('Location: '.$uri);
             die();
         }
         
@@ -31,7 +27,7 @@ namespace packages\Tres\core {
          * @param string $alias The route's alias.
          */
         public static function route($alias){
-            Redirect::to(URL::route($alias));
+            self::to(URL::route($alias));
         }
         
     }

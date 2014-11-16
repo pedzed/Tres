@@ -18,12 +18,12 @@ namespace controllers {
         /**
          * Instantiates the user.
          * 
-         * @param array $data
+         * @param string $username
          */
-        public function __construct(array $data){
+        public function __construct($username){
             parent::__construct();
             
-            $this->_user = new User($data['username']);
+            $this->_user = new User($username);
             
             if(!$this->_user->exists()){
                 // 

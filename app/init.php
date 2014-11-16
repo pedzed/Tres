@@ -39,6 +39,7 @@ spl_autoload_register(function($className){
 // Class shortcuts
 class_alias('packages\Tres\config\Config', 'Config');
 class_alias('packages\Tres\router\Route', 'Route');
+class_alias('packages\Tres\router\Redirect', 'Redirect');
 class_alias('packages\Tres\router\URL', 'URL');
 class_alias('packages\Tres\core\View', 'View');
 

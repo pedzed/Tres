@@ -15,7 +15,7 @@
         <br />
         <center>
             You're now viewing the user-profile view.<br />
-            Click <a href="<?php echo packages\Tres\core\URL::route('home'); ?>">here</a> to go home.
+            Click <a href="<?= URL::route('home'); ?>">here</a> to go home.
         </center>
         
         <div id="main-content">
