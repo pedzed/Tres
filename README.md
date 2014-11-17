@@ -1,6 +1,6 @@
 # Tres Framework
 
-*Note: This is heavily in development. Codebase is unstable and might change
+*Note: This is heavily in development. Codebase is unstable and may change
 at any time.*
 
 Tres is a well organized, powerful and highly extensible MVC framework for the 
