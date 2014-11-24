@@ -6,6 +6,12 @@ Route::get('/', [
     'alias' => 'home'
 ]);
 
+Route::get('/about', [
+    'controller' => 'AboutController',
+    'method' => 'renderPage',
+    'alias' => 'about'
+]);
+
 Route::get('/mail-test', [
     'alias' => 'mail-test',
     function(){

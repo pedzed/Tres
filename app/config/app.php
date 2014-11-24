@@ -10,7 +10,7 @@ return array(
     | This is the name of your application.
     | 
     */
-    'name' => 'Tres framework',
+    'name' => 'Tres Framework',
     
     /*
     |--------------------------------------------------------------------------
