@@ -20,7 +20,7 @@ namespace Tres\core\app {
          * Typically introcudes new functionality, makes code better, or contains
          * general updates and improvements. This SHOULD be backwards compatible.
          */
-        const MINOR_VERSION = 5;
+        const MINOR_VERSION = 6;
         
         /**
          * Patch version.
@@ -29,7 +29,7 @@ namespace Tres\core\app {
          * The patch version MUST be backwards compatible. Otherwise, it's a
          * minor update.
          */
-        const PATCH_VERSION = 1;
+        const PATCH_VERSION = 0;
         
         /**
          * Gets the framework version.
