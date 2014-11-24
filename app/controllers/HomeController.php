@@ -4,7 +4,7 @@ namespace controllers {
     
     use Config;
     use View;
-    use packages\Tres\core\app\Version as TresVersion;
+    use Tres\core\app\Version as TresVersion;
     
     class HomeController extends BaseController {
         

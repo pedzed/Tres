@@ -1,13 +1,13 @@
 <?php
 
-use packages\Tres\core\File;
-use packages\Tres\database\Config as DBConfig;
-use packages\Tres\mailer\Config as MailConfig;
+use Tres\core\File;
+//use Tres\database\Config as DBConfig;
+use Tres\mailer\Config as MailConfig;
 
 // Paths for inclusion.
 define('ROOT', dirname(__DIR__));
 define('APP_DIR', ROOT.'/app');
-define('PACKAGE_DIR', APP_DIR.'/packages');
+define('VENDOR_DIR', ROOT.'/vendor');
 define('CONFIG_DIR', APP_DIR.'/config');
 define('CONTROLLER_DIR', APP_DIR.'/controllers');
 define('MODEL_DIR', APP_DIR.'/models');
@@ -27,24 +27,17 @@ define('IMAGE_URL', PUBLIC_URL.'/images');
 define('STYLE_URL', PUBLIC_URL.'/styles');
 define('SCRIPT_URL', PUBLIC_URL.'/scripts');
 
-spl_autoload_register(function($className){
-    $class = str_replace('\\', '/', ROOT.'/app/'.$className.'.php');
-    
-    if(is_readable($class)){
-        require_once($class);
-    } else {
-        die('Class <b>'.$className.'</b> is not readable. Does it exist?<br/>'.$class);
-    }
-});
+require_once(VENDOR_DIR.'/autoload.php');
 
 // Class shortcuts
-class_alias('packages\Tres\config\Config', 'Config');
-class_alias('packages\Tres\core\View', 'View');
-class_alias('packages\Tres\mailer\Mail', 'Mail');
-class_alias('packages\Tres\mailer\Connection', 'MailConnection');
-class_alias('packages\Tres\router\Route', 'Route');
-class_alias('packages\Tres\router\Redirect', 'Redirect');
-class_alias('packages\Tres\router\URL', 'URL');
+class_alias('Tres\config\Config', 'Config');
+class_alias('Tres\core\Asset', 'Asset');
+class_alias('Tres\core\View', 'View');
+class_alias('Tres\mailer\Mail', 'Mail');
+class_alias('Tres\mailer\Connection', 'MailConnection');
+class_alias('Tres\router\Route', 'Route');
+class_alias('Tres\router\Redirect', 'Redirect');
+class_alias('Tres\router\URL', 'URL');
 
 // Config set-up
 Config::add('app', CONFIG_DIR.'/app.php');
@@ -52,14 +45,9 @@ Config::add('db', CONFIG_DIR.'/db.php');
 Config::add('router', CONFIG_DIR.'/router.php');
 Config::add('mailer', CONFIG_DIR.'/mailer.php');
 
-DBConfig::set(Config::get('db'));
+//DBConfig::set(Config::get('db'));
 Route::setConfig(Config::get('router'));
 MailConfig::set(Config::get('mailer'));
-
-// Functions to load
-File::inc(PACKAGE_DIR.'/Tres/functions/config.php');
-File::inc(PACKAGE_DIR.'/Tres/functions/assets.php');
-File::inc(PACKAGE_DIR.'/Tres/functions/quick-debug.php');
 
 date_default_timezone_set(Config::get('app/timezone'));
 
