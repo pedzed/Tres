@@ -47,6 +47,8 @@ namespace Tres\core\app {
                     echo $e;
                 }
             }
+            
+            header('X-Framework: Tres Framework/'.Version::get(true, true, true));
         }
         
     }
