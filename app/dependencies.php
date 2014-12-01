@@ -28,9 +28,9 @@ return [
     | 
     */
     'namespaces' => [
-        'models' => 'app/models',
-        'controllers' => 'app/controllers',
-        'Tres' => 'vendor/Tres',
+        'models'        => 'app/models',
+        'controllers'   => 'app/controllers',
+        'Tres'          => 'vendor/Tres',
     ],
     
     /*
@@ -46,14 +46,14 @@ return [
     | 
     */
     'aliases' => [
-        'Asset' => 'Tres\core\Asset',
-        'Config' => 'Tres\config\Config',
-        'Mail' => 'Tres\mailer\Mail',
-        'MailConnection' => 'Tres\mailer\Connection',
-        'Route' => 'Tres\router\Route',
-        'Redirect' => 'Tres\router\Redirect',
-        'URL' => 'Tres\router\URL',
-        'View' => 'Tres\core\View',
+        'Asset'             => 'Tres\core\Asset',
+        'Config'            => 'Tres\config\Config',
+        'Mail'              => 'Tres\mailer\Mail',
+        'MailConnection'    => 'Tres\mailer\Connection',
+        'Route'             => 'Tres\router\Route',
+        'Redirect'          => 'Tres\router\Redirect',
+        'URL'               => 'Tres\router\URL',
+        'View'              => 'Tres\core\View',
     ],
     
     /*
