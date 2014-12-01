@@ -1,10 +1,16 @@
 <?php
 
-use Tres\core\File;
-//use Tres\database\Config as DBConfig;
-use Tres\mailer\Config as MailConfig;
+use Tres\package_manager\Autoload;
 
-// Paths for inclusion.
+/*
+|------------------------------------------------------------------------------
+| URI registration
+|------------------------------------------------------------------------------
+| 
+| To prevent hardcoding the most important URI's, there are these constants to 
+| determine where to access everything. 
+| 
+*/
 define('ROOT_DIR', dirname(__DIR__));
 define('APP_DIR', ROOT_DIR.'/app');
 define('VENDOR_DIR', ROOT_DIR.'/vendor');
@@ -27,20 +33,45 @@ define('IMAGE_URL', PUBLIC_URL.'/images');
 define('STYLE_URL', PUBLIC_URL.'/styles');
 define('SCRIPT_URL', PUBLIC_URL.'/scripts');
 
-define('AUTOLOAD_MANIFEST', APP_DIR.'/dependencies.php');
+define('DEPENDENCY_MANIFEST', APP_DIR.'/dependencies.php');
 
-require_once(VENDOR_DIR.'/autoload.php');
+/*
+|------------------------------------------------------------------------------
+| Autoloading
+|------------------------------------------------------------------------------
+| 
+| The autoloader handles everything to be able to make use of dependencies. 
+| However, it relies on the dependency manifest.
+| 
+*/
+require_once(VENDOR_DIR.'/Tres/package_manager/Autoload.php');
+new Autoload(ROOT_DIR, require_once(DEPENDENCY_MANIFEST));
 
-// Config set-up
+/*
+|------------------------------------------------------------------------------
+| Configuration set-up
+|------------------------------------------------------------------------------
+| 
+| Every configuration needs to be manually assigned with an alias/path 
+| combination so it can be nicely accessed.
+| 
+*/
 Config::add('app', CONFIG_DIR.'/app.php');
 Config::add('db', CONFIG_DIR.'/db.php');
 Config::add('router', CONFIG_DIR.'/router.php');
 Config::add('mailer', CONFIG_DIR.'/mailer.php');
-
-//DBConfig::set(Config::get('db'));
 Route::setConfig(Config::get('router'));
-MailConfig::set(Config::get('mailer'));
+Tres\mailer\Config::set(Config::get('mailer'));
 
+/*
+|------------------------------------------------------------------------------
+| Server settings
+|------------------------------------------------------------------------------
+| 
+| Every server may have a different configuration. Any supported configuration 
+| can be added here, so they get overwritten.
+| 
+*/
 date_default_timezone_set(Config::get('app/timezone'));
 
 // TODO: Move to new file.
