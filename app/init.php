@@ -5,14 +5,14 @@ use Tres\core\File;
 use Tres\mailer\Config as MailConfig;
 
 // Paths for inclusion.
-define('ROOT', dirname(__DIR__));
-define('APP_DIR', ROOT.'/app');
-define('VENDOR_DIR', ROOT.'/vendor');
+define('ROOT_DIR', dirname(__DIR__));
+define('APP_DIR', ROOT_DIR.'/app');
+define('VENDOR_DIR', ROOT_DIR.'/vendor');
 define('CONFIG_DIR', APP_DIR.'/config');
 define('CONTROLLER_DIR', APP_DIR.'/controllers');
 define('MODEL_DIR', APP_DIR.'/models');
 define('VIEW_DIR', APP_DIR.'/views');
-define('PUBLIC_DIR', ROOT.'/public_html');
+define('PUBLIC_DIR', ROOT_DIR.'/public_html');
 
 define('PUBLIC_URL', 
     ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://').
@@ -27,17 +27,9 @@ define('IMAGE_URL', PUBLIC_URL.'/images');
 define('STYLE_URL', PUBLIC_URL.'/styles');
 define('SCRIPT_URL', PUBLIC_URL.'/scripts');
 
-require_once(VENDOR_DIR.'/autoload.php');
+define('AUTOLOAD_MANIFEST', APP_DIR.'/autoload-manifest.php');
 
-// Class shortcuts
-class_alias('Tres\config\Config', 'Config');
-class_alias('Tres\core\Asset', 'Asset');
-class_alias('Tres\core\View', 'View');
-class_alias('Tres\mailer\Mail', 'Mail');
-class_alias('Tres\mailer\Connection', 'MailConnection');
-class_alias('Tres\router\Route', 'Route');
-class_alias('Tres\router\Redirect', 'Redirect');
-class_alias('Tres\router\URL', 'URL');
+require_once(VENDOR_DIR.'/autoload.php');
 
 // Config set-up
 Config::add('app', CONFIG_DIR.'/app.php');

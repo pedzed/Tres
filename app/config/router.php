@@ -3,7 +3,7 @@
 return [
     
     // The route's base path
-    'root' => ROOT.'/public_html',
+    'root' => ROOT_DIR.'/public_html',
     
     'controllers' => [
         // The namespace for all controllers.
