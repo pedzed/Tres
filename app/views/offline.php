@@ -4,7 +4,7 @@
         <meta charset="utf8" />
         <title>Offline - {{ $appName }}</title>
         
-        {{ style('main.css') }}
+        {{ style('styles/main.css') }}
         {{ favicon('favicon.ico') }}
         
         <!--[if lt IE 9]>

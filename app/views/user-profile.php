@@ -4,7 +4,7 @@
         <meta charset="utf8" />
         <title><?php echo $_viewData['userData']['username']; ?>'s user profile - {{ $appName }}</title>
         
-        {{ style('main.css') }}
+        {{ style('styles/main.css') }}
         {{ favicon('favicon.ico') }}
         
         <!--[if lt IE 9]>

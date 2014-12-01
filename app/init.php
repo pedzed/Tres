@@ -30,8 +30,8 @@ define('PUBLIC_URL',
     )
 );
 define('IMAGE_URL', PUBLIC_URL.'/images');
-define('STYLE_URL', PUBLIC_URL.'/styles');
-define('SCRIPT_URL', PUBLIC_URL.'/scripts');
+define('STYLE_URL', PUBLIC_URL);
+define('SCRIPT_URL', PUBLIC_URL);
 
 define('DEPENDENCY_MANIFEST', APP_DIR.'/dependencies.php');
 
@@ -60,6 +60,7 @@ Config::add('app', CONFIG_DIR.'/app.php');
 Config::add('db', CONFIG_DIR.'/db.php');
 Config::add('router', CONFIG_DIR.'/router.php');
 Config::add('mailer', CONFIG_DIR.'/mailer.php');
+
 Route::setConfig(Config::get('router'));
 Tres\mailer\Config::set(Config::get('mailer'));
 
