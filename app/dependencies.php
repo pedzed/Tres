@@ -2,10 +2,10 @@
 
 /*
 |------------------------------------------------------------------------------
-| Manifest
+| Dependency manifest
 |------------------------------------------------------------------------------
 | 
-| This file is used to register dependencies. Those dependencies will be 
+| This file is used to register dependencies. Dependencies will be 
 | automatically loaded. 
 | 
 */

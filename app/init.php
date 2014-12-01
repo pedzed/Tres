@@ -27,7 +27,7 @@ define('IMAGE_URL', PUBLIC_URL.'/images');
 define('STYLE_URL', PUBLIC_URL.'/styles');
 define('SCRIPT_URL', PUBLIC_URL.'/scripts');
 
-define('AUTOLOAD_MANIFEST', APP_DIR.'/autoload-manifest.php');
+define('AUTOLOAD_MANIFEST', APP_DIR.'/dependencies.php');
 
 require_once(VENDOR_DIR.'/autoload.php');
 
