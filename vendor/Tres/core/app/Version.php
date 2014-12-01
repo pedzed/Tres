@@ -20,7 +20,7 @@ namespace Tres\core\app {
          * Typically introcudes new functionality, makes code better, or contains
          * general updates and improvements. This SHOULD be backwards compatible.
          */
-        const MINOR_VERSION = 6;
+        const MINOR_VERSION = 7;
         
         /**
          * Patch version.
