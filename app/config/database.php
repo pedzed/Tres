@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     
     'display_errors' => true,
     
     /*
     |--------------------------------------------------------------------------
-    | Default database connection
+    | Defaults
     |--------------------------------------------------------------------------
     | 
     | The default database connection you wish to use from the list of database
@@ -27,8 +27,9 @@ return array(
     | rather than a domain for faster performance.
     |
     */
-    'connections' => array(
-        'MySQL1' => array(
+    'connections' => [
+        
+        'MySQL1' => [
             'driver'    => 'mysql',
             'database'  => 'tres',
             'host'      => '127.0.0.1',
@@ -36,7 +37,20 @@ return array(
             'charset'   => 'utf8',
             'username'  => 'root',
             'password'  => 'password'
-        )
-    )
+        ],
+        
+    ],
     
-);
+    /*
+    |--------------------------------------------------------------------------
+    | Logging
+    |--------------------------------------------------------------------------
+    | 
+    | Logs stuff to keep a record of events.
+    |
+    */
+    'logs' => [
+        'dir' => __DIR__.'/logs',
+    ],
+    
+];

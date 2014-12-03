@@ -61,8 +61,8 @@ return [
     | Files
     |--------------------------------------------------------------------------
     | 
-    | This is mainly used for loading functions, but also works for other 
-    | files like an init/bootstrap file.
+    | If you need to load functions, you can do it here. This may be used for 
+    | other files as well.
     | 
     */
     'files' => [

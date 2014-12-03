@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     
     /*
     |--------------------------------------------------------------------------
@@ -10,7 +10,7 @@ return array(
     | This is the name of your application.
     | 
     */
-    'name' => 'Tres framework',
+    'name' => 'Tres Framework',
     
     /*
     |--------------------------------------------------------------------------
@@ -30,9 +30,10 @@ return array(
     | Debug mode
     |--------------------------------------------------------------------------
     | 
-    | Be sure that this is NOT set to 2 (Development) in a production 
-    | environment. Showing unecessary error messages may scare your users off, 
-    | but more importantly, it might give away sensitive information.
+    | In a production environment, be sure that this is NOT set to mode 2 
+    | (Development). Showing error messages may scare your users off, but more 
+    | importantly, it is a potential a security risk: it might give away too 
+    | much sensitive information which may be used against you.
     | 
     | Production:  0 (Limited)
     | Default:     1 (Normal)
@@ -43,13 +44,13 @@ return array(
     
     /*
     |--------------------------------------------------------------------------
-    | Offline mode
+    | Offline switch
     |--------------------------------------------------------------------------
     | 
-    | It's useful to be able to easily take the application down with a nice 
-    | message, in case something goes terribly wrong.
+    | It's good to be able to immediately take the application down in case 
+    | something goes terribly wrong. Well, here it is: the offline switch.
     | 
     */
     'offline' => false,
     
-);
+];

@@ -7,8 +7,8 @@ use Tres\package_manager\Autoload;
 | URI registration
 |------------------------------------------------------------------------------
 | 
-| To prevent hardcoding the most important URI's, there are these constants to 
-| determine where to access everything. 
+| To prevent hardcoding the most important URI's, there are constants available 
+| to determine where to access a certain file or path. 
 | 
 */
 define('ROOT_DIR', dirname(__DIR__));
@@ -57,11 +57,16 @@ new Autoload(ROOT_DIR, require_once(DEPENDENCY_MANIFEST));
 | 
 */
 Config::add('app', CONFIG_DIR.'/app.php');
-Config::add('db', CONFIG_DIR.'/db.php');
-Config::add('router', CONFIG_DIR.'/router.php');
+Config::add('db', CONFIG_DIR.'/database.php');
 Config::add('mailer', CONFIG_DIR.'/mailer.php');
 
-Route::setConfig(Config::get('router'));
+Route::setConfig([
+    'root' => PUBLIC_DIR,
+    'controllers' => [
+        'namespace' => 'controllers',
+        'dir' => CONTROLLER_DIR
+    ]
+]);
 Tres\mailer\Config::set(Config::get('mailer'));
 
 /*
@@ -75,16 +80,24 @@ Tres\mailer\Config::set(Config::get('mailer'));
 */
 date_default_timezone_set(Config::get('app/timezone'));
 
-// TODO: Move to new file.
-// Debug check
+/*
+|------------------------------------------------------------------------------
+| Debug management
+|------------------------------------------------------------------------------
+| 
+| Here you can tell the application what to do if the debug configuration is 
+| set to a certain mode.
+| 
+*/
 switch(Config::get('app/debug')){
-    default:
-    case 0:
-        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
-        break;
-    case 1:
     case 2:
+    case 1:
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
-        break;
+    break;
+    
+    case 0:
+    default:
+        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+    break;
 }
