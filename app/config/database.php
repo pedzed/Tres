@@ -50,7 +50,15 @@ return [
     |
     */
     'logs' => [
-        'dir' => __DIR__.'/logs',
+        'dir' => [
+            'path'        => LOG_DIR.'/Trestle',
+            // 'permissions' => '',
+        ],
+        // 'file' => [
+        //     'ext'         => '',
+        //     'size'        => '',
+        //     'permissions' => '',
+        // ],
     ],
     
 ];

@@ -18,6 +18,8 @@ define('CONFIG_DIR', APP_DIR.'/config');
 define('CONTROLLER_DIR', APP_DIR.'/controllers');
 define('MODEL_DIR', APP_DIR.'/models');
 define('VIEW_DIR', APP_DIR.'/views');
+define('STORAGE_DIR', APP_DIR.'/storage');
+define('LOG_DIR', STORAGE_DIR.'/logs');
 define('PUBLIC_DIR', ROOT_DIR.'/public_html');
 
 define('PUBLIC_URL', 

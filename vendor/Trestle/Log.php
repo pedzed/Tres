@@ -201,7 +201,7 @@ namespace Trestle {
                     fwrite($fileHandle, 'Options -Indexes');
                     fclose($fileHandle);
                 }
-            } else {
+            } else {die($this->_directory);
                 throw new LogException('Cannot create/write to file. Permission denied.');
             }
         }

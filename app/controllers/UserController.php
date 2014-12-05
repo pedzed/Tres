@@ -20,7 +20,7 @@ namespace controllers {
          * 
          * @param string $username
          */
-        public function __construct($username){
+        public function __construct($username){ // TODO: Fix router bug.
             parent::__construct();
             
             $this->_user = new User($username);

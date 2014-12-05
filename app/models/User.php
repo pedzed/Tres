@@ -2,7 +2,6 @@
 
 namespace models {
     
-    use PDO;
     use Database;
     
     class User {
@@ -62,7 +61,7 @@ namespace models {
          * @param string $user
          */
         public function __construct($user){
-            $this->_username = $user;
+            $this->_username = $user['username'];
             $this->_db = new Database();
         }
         
@@ -89,7 +88,7 @@ namespace models {
             $user = $this->_db->get('users')
                               ->where('username', '=', $this->_username)
                               ->exec();
-            $user = $user->fetch(PDO::FETCH_OBJ);
+            $user = $user->first();
             
             if($user){
                 $this->_firstname = $user->firstname;
