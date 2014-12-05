@@ -91,14 +91,18 @@ date_default_timezone_set(Config::get('app/timezone'));
 | 
 */
 switch(Config::get('app/debug')){
+    default:
+    case 0:
+        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+    break;
+    
     case 2:
+        $whoops = new Whoops\Run;
+        $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler);
+        $whoops->register();
     case 1:
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
     break;
-    
-    case 0:
-    default:
-        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
-    break;
 }
+

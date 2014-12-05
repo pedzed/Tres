@@ -32,6 +32,7 @@ return [
         'controllers'   => 'app/controllers',
         'Tres'          => 'vendor/Tres',
         'Trestle'       => 'vendor/Trestle',
+        'Whoops'        => 'vendor/Whoops',
     ],
     
     /*
