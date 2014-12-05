@@ -31,6 +31,7 @@ return [
         'models'        => 'app/models',
         'controllers'   => 'app/controllers',
         'Tres'          => 'vendor/Tres',
+        'Trestle'       => 'vendor/Trestle',
     ],
     
     /*
@@ -48,6 +49,7 @@ return [
     'aliases' => [
         'Asset'             => 'Tres\core\Asset',
         'Config'            => 'Tres\config\Config',
+        'Database'           => 'Trestle\Database',
         'Mail'              => 'Tres\mailer\Mail',
         'MailConnection'    => 'Tres\mailer\Connection',
         'Route'             => 'Tres\router\Route',

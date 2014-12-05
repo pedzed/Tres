@@ -3,7 +3,7 @@
 namespace models {
     
     use PDO;
-    use packages\Tres\database\DB;
+    use Database;
     
     class User {
         
@@ -63,7 +63,7 @@ namespace models {
          */
         public function __construct($user){
             $this->_username = $user;
-            $this->_db = new DB();
+            $this->_db = new Database();
         }
         
         /**

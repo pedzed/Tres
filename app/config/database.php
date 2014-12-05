@@ -30,7 +30,7 @@ return [
     'connections' => [
         
         'MySQL1' => [
-            'driver'    => 'mysql',
+            'driver'    => 'MySQL',
             'database'  => 'tres',
             'host'      => '127.0.0.1',
             'port'      => '3306',

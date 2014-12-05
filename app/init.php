@@ -68,6 +68,7 @@ Route::setConfig([
     ]
 ]);
 Tres\mailer\Config::set(Config::get('mailer'));
+Trestle\Config::set(Config::get('db'));
 
 /*
 |------------------------------------------------------------------------------
