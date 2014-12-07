@@ -4,8 +4,8 @@
         <meta charset="utf8" />
         <title>Not Found (404) - {{ $appName }}</title>
         
-        {{ style('styles/main.css') }}
-        {{ favicon('favicon.ico') }}
+        {{! style('styles/main.css') }}
+        {{! favicon('favicon.ico') }}
         
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

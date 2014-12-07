@@ -69,7 +69,12 @@ Route::setConfig([
         'dir' => CONTROLLER_DIR
     ]
 ]);
+
+View::$rootURI = VIEW_DIR;
+View::$storageDir = STORAGE_DIR.'/views/';
+
 Tres\mailer\Config::set(Config::get('mailer'));
+
 Trestle\Config::set(Config::get('db'));
 
 /*

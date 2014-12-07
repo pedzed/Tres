@@ -33,7 +33,7 @@ namespace controllers {
         public function getProfile($user){
             View::make('user-profile', [
                 'appName' => Config::get('app/name'),
-                'userData' => $this->_user->getData(),
+                'user' => $this->_user->getData(),
             ]);
         }
         

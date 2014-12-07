@@ -4,8 +4,8 @@
         <meta charset="utf8" />
         <title>Home - {{ $appName }}</title>
         
-        {{ style('styles/main.css') }}
-        {{ favicon('favicon.ico') }}
+        {{! style('styles/main.css') }}
+        {{! favicon('favicon.ico') }}
         
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
                 
                 <p>Yet another micro MVC framework. :)</p>
                 
-                <a href="#" class="tres-logo">
+                <a href="{{ URL::route('home') }}" class="tres-logo">
                     <img src="{{ IMAGE_URL }}/tres-logo.png"
                          width="200"
                          height="200"
