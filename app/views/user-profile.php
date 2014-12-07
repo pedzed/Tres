@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf8" />
-        <title>{{ $user['username'] }}'s user profile - {{ $appName }}</title>
+        <title>{{ $user->username }}'s user profile - {{ $appName }}</title>
         
         {{! style('styles/main.css') }}
         {{! favicon('favicon.ico') }}
@@ -21,7 +21,11 @@
         <div id="main-content">
             <div style="background:#f3f3f3; padding:32px 24px; border: 1px solid #ddd; border-radius:4px;">
                 <h2>User Data</h2>
-                <pre>{{ print_r($user) }}</pre>
+                <div>
+                    @foreach($user as $field => $value)
+                        {{ $field }}: {{ $value }}<br />
+                    @endforeach
+                </div>
             </div><br />
             
             <form method="POST">
