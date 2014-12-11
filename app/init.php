@@ -28,7 +28,7 @@ define('PUBLIC_URL',
     str_replace(
         $_SERVER['DOCUMENT_ROOT'],
         '',
-        str_replace('\\', '/', PUBLIC_DIR)
+        rtrim(str_replace('\\', '/', PUBLIC_DIR), '/')
     )
 );
 define('IMAGE_URL', PUBLIC_URL.'/images');
