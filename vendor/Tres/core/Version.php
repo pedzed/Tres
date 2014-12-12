@@ -25,7 +25,7 @@ namespace Tres\core {
          * Typically introcudes new functionality, makes code better, or contains
          * general updates and improvements. This SHOULD be backwards compatible.
          */
-        const MINOR_VERSION = 7;
+        const MINOR_VERSION = 8;
         
         /**
          * Patch version.
@@ -34,7 +34,7 @@ namespace Tres\core {
          * The patch version MUST be backwards compatible. Otherwise, it's a
          * minor update.
          */
-        const PATCH_VERSION = 1;
+        const PATCH_VERSION = 0;
         
         /**
          * Gets the framework version.
@@ -43,15 +43,12 @@ namespace Tres\core {
          * @param  bool   $patch (Optional)
          * @return string
          */
-        public static function get($minor = true, $patch = false){
-            $version = self::MAJOR_VERSION;
+        public static function get(){
+            $version  = self::MAJOR_VERSION;
+            $version .= '.'.self::MINOR_VERSION;
             
-            if($minor){
-                $version .= '.'.self::MINOR_VERSION;
-                
-                if($patch){
-                   $version .= '.'.self::PATCH_VERSION;
-                }
+            if(self::PATCH_VERSION !== 0){
+               $version .= '.'.self::PATCH_VERSION;
             }
             
             return $version;
