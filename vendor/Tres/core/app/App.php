@@ -16,6 +16,8 @@ namespace Tres\core\app {
          * Initializes the application.
          */
         public static function init(){
+            header('X-Framework: Tres Framework/'.Version::get(true, true, true));
+            
             // Check if the app is compatible with the server environment.
             try {
                 $compatChecker = new CompatibilityChecker();
@@ -48,7 +50,6 @@ namespace Tres\core\app {
                 }
             }
             
-            header('X-Framework: Tres Framework/'.Version::get(true, true, true));
         }
         
     }
