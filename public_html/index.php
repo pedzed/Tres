@@ -1,7 +1,5 @@
 <?php
 
-use Tres\core\app\App;
-
 /*
 |------------------------------------------------------------------------------
 | Index - the main file used throughout the whole application
@@ -13,4 +11,4 @@ use Tres\core\app\App;
 */
 require_once('../app/init.php');
 
-App::init();
+Tres\core\App::init();

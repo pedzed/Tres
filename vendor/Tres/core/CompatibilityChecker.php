@@ -1,6 +1,6 @@
 <?php
 
-namespace Tres\core\app {
+namespace Tres\core {
     
     use Exception;
     

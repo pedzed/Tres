@@ -19,7 +19,7 @@ Route::get('/', [
 Route::get('/about', [
     'alias' => 'about',
     function(){
-        echo 'Tres Framework '.Tres\core\app\Version::get(true, true, true);
+        echo 'Tres Framework '.Tres\core\Version::get(true, true, true);
     }
 ]);
 
