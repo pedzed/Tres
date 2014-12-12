@@ -2,9 +2,14 @@
 
 namespace Tres\core\app {
     
-    /**
-     * The framework version.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Framework version
+    |--------------------------------------------------------------------------
+    | 
+    | Gives the option to get the framework version.
+    | 
+    */
     final class Version {
         
         /**
@@ -29,7 +34,7 @@ namespace Tres\core\app {
          * The patch version MUST be backwards compatible. Otherwise, it's a
          * minor update.
          */
-        const PATCH_VERSION = 0;
+        const PATCH_VERSION = 1;
         
         /**
          * Gets the framework version.

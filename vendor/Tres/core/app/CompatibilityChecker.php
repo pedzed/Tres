@@ -6,13 +6,18 @@ namespace Tres\core\app {
     
     class CompatibilityCheckerException extends Exception {}
     
-    /**
-     * Compatibility checker
-     * 
-     * Tells whether the application is compatible with the server environment 
-     * or not.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Compatibility checker
+    |--------------------------------------------------------------------------
+    | 
+    | Tells whether the application is compatible with the server environment 
+    | or not.
+    |
+    */
     class CompatibilityChecker {
+        
+        const MIN_PHP_VERSION = '5.4';
         
         /**
          * Tells whether the PHP version is supported or not.
@@ -20,7 +25,7 @@ namespace Tres\core\app {
          * @return bool
          */
         public function hasSupportedPHPVersion(){
-            return version_compare(PHP_VERSION, '5.4', '>=');
+            return version_compare(PHP_VERSION, self::MIN_PHP_VERSION, '>=');
         }
         
         /**
@@ -33,6 +38,8 @@ namespace Tres\core\app {
             if(apache_get_version()){
                 return in_array('mod_rewrite', apache_get_modules());
             }
+            
+            return true;
         }
         
         /**
@@ -41,8 +48,7 @@ namespace Tres\core\app {
         public function checkPHPVersion(){
             if(!$this->hasSupportedPHPVersion()){
                 throw new CompatibilityCheckerException(
-                    'Tres is not compatible with PHP versions below 5.4.
-                     Please, consider upgrading to the latest PHP version.'
+                    'Tres Framework is not compatible with PHP versions below '.self::MIN_PHP_VERSION.'. '
                 );
             }
         }

@@ -5,18 +5,21 @@ namespace Tres\core\app {
     use Config;
     use Route;
     
-    /**
-     * The framework application class.
-     * 
-     * This is the main entry point for all the code.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | App - The framework application class
+    |--------------------------------------------------------------------------
+    | 
+    | This is the main entry point for the framework.
+    | 
+    */
     final class App {
         
         /**
          * Initializes the application.
          */
         public static function init(){
-            header('X-Framework: Tres Framework/'.Version::get(true, true, true));
+            header('X-Powered-By: Tres Framework/'.Version::get(true, true, true));
             
             // Check if the app is compatible with the server environment.
             $compatChecker = new CompatibilityChecker();

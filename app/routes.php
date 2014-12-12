@@ -1,9 +1,26 @@
 <?php
 
+/*
+|------------------------------------------------------------------------------
+| Main application routes
+|------------------------------------------------------------------------------
+| 
+| This file is used to register all the routes for the main application. If 
+| there are more applications to route to, importing them is the way to go.
+| 
+*/
+
 Route::get('/', [
     'controller' => 'HomeController',
     'method' => 'renderPage',
     'alias' => 'home'
+]);
+
+Route::get('/about', [
+    'alias' => 'about',
+    function(){
+        echo 'Tres Framework '.Tres\core\app\Version::get(true, true, true);
+    }
 ]);
 
 Route::get('/mail-test', [
