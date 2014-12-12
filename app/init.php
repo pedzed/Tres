@@ -95,16 +95,30 @@ date_default_timezone_set(Config::get('app/timezone'));
 switch(Config::get('app/debug')){
     default:
     case 0:
-        error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+        ini_set('display_errors', 0);
+        error_reporting(0);
+        
+        set_exception_handler(function($e){
+            // TODO: Log $e.
+        });
+    break;
+    
+    case 1:
+        ini_set('display_errors', 1);
+        error_reporting(-1);
+        
+        set_exception_handler(function($e){
+            echo $e->getMessage();
+        });
     break;
     
     case 2:
+        ini_set('display_errors', 1);
+        error_reporting(-1);
+        
         $whoops = new Whoops\Run;
         $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler);
         $whoops->register();
-    case 1:
-        ini_set('display_errors', 1);
-        error_reporting(E_ALL);
     break;
 }
 
