@@ -21,7 +21,7 @@
                 <p>Yet another micro MVC framework. :)</p>
                 
                 <a href="{{ URL::route('home') }}" class="tres-logo">
-                    <img src="{{ IMAGE_URL }}/tres-logo.png"
+                    <img src="{{ PUBLIC_URL }}/images/tres-logo.png"
                          width="200"
                          height="200"
                          alt="Tres logo"

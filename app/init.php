@@ -11,7 +11,7 @@ use Tres\package_manager\Autoload;
 | to determine where to access a certain file or path. 
 | 
 */
-define('ROOT_DIR', dirname(__DIR__));
+define('ROOT_DIR', str_replace('\\', '/', dirname(__DIR__)));
 define('APP_DIR', ROOT_DIR.'/app');
 define('VENDOR_DIR', ROOT_DIR.'/vendor');
 define('CONFIG_DIR', APP_DIR.'/config');
@@ -28,14 +28,9 @@ define('PUBLIC_URL',
     str_replace(
         $_SERVER['DOCUMENT_ROOT'],
         '',
-        rtrim(str_replace('\\', '/', PUBLIC_DIR), '/')
+        rtrim(PUBLIC_DIR, '/')
     )
 );
-define('IMAGE_URL', PUBLIC_URL.'/images');
-define('STYLE_URL', PUBLIC_URL);
-define('SCRIPT_URL', PUBLIC_URL);
-
-define('DEPENDENCY_MANIFEST', APP_DIR.'/dependencies.php');
 
 /*
 |------------------------------------------------------------------------------
@@ -47,7 +42,7 @@ define('DEPENDENCY_MANIFEST', APP_DIR.'/dependencies.php');
 | 
 */
 require_once(VENDOR_DIR.'/Tres/package_manager/Autoload.php');
-new Autoload(ROOT_DIR, require_once(DEPENDENCY_MANIFEST));
+new Autoload(ROOT_DIR, require_once(APP_DIR.'/dependencies.php'));
 
 /*
 |------------------------------------------------------------------------------

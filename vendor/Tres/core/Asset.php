@@ -21,7 +21,7 @@ namespace Tres\core {
          * @return string           Generated tag.
          */
         public function getStyle($file, $relative = true){
-            $this->_path = ($relative) ? STYLE_URL.'/'.$file : $file;
+            $this->_path = ($relative) ? PUBLIC_URL.'/'.$file : $file;
             return  '<link rel="stylesheet" href="'.
                         XSSHTML::escape($this->_path).
                     '" />'.PHP_EOL;
@@ -35,7 +35,7 @@ namespace Tres\core {
          * @return string           Generated tag.
          */
         public function getScript($file, $relative = true){
-            $this->_path = ($relative) ? SCRIPT_URL.'/'.$file : $file;
+            $this->_path = ($relative) ? PUBLIC_URL.'/'.$file : $file;
             return  '<script type="text/javascript" src="'.
                         XSSHTML::escape($this->_path).
                     '"></script>'.PHP_EOL;
