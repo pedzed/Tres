@@ -17,5 +17,10 @@ having to know much about PHP, or have to dig into the code.
 - The mod_rewrite module for .htaccess.
 - PHP 5.4 or greater.
 
+## Download
+Please, download Tres Framework from its official website: [tresframework.com][website].
+
 ## Documentation
 [Documentation](https://github.com/tres-framework/docs/)
+
+[website]: http://tresframework.com
