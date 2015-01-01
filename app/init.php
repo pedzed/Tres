@@ -1,6 +1,6 @@
 <?php
 
-use Tres\package_manager\Autoload;
+use Tres\package_manager\Autoloader;
 
 /*
 |------------------------------------------------------------------------------
@@ -41,8 +41,8 @@ define('PUBLIC_URL',
 | However, it relies on the dependency manifest.
 | 
 */
-require_once(VENDOR_DIR.'/Tres/package_manager/Autoload.php');
-new Autoload(ROOT_DIR, require_once(APP_DIR.'/dependencies.php'));
+require_once(VENDOR_DIR.'/Tres/package_manager/Autoloader.php');
+$autoloader = new Autoloader(ROOT_DIR, require_once(APP_DIR.'/dependencies.php'));
 
 /*
 |------------------------------------------------------------------------------
@@ -57,13 +57,10 @@ Config::add('app', CONFIG_DIR.'/app.php');
 Config::add('db', CONFIG_DIR.'/database.php');
 Config::add('mailer', CONFIG_DIR.'/mailer.php');
 
-Route::setConfig([
+Route::$config = [
     'root' => PUBLIC_DIR,
-    'controllers' => [
-        'namespace' => 'controllers',
-        'dir' => CONTROLLER_DIR
-    ]
-]);
+    'default_controller_namespace' => 'controllers'
+];
 
 View::$rootURI = VIEW_DIR;
 View::$storageDir = STORAGE_DIR.'/views/';

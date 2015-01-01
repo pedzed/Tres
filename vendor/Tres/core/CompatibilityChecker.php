@@ -17,6 +17,9 @@ namespace Tres\core {
     */
     class CompatibilityChecker {
         
+        /**
+         * The minimum required PHP version.
+         */
         const MIN_PHP_VERSION = '5.4';
         
         /**

@@ -11,8 +11,7 @@
 */
 
 Route::get('/', [
-    'controller' => 'HomeController',
-    'method' => 'renderPage',
+    'uses' => 'HomeController@renderPage',
     'alias' => 'home'
 ]);
 
@@ -50,12 +49,10 @@ Route::get('/mail-test', [
 ]);
 
 Route::get('/users/:username/', [
-    'controller' => 'UserController',
-    'method' => 'getProfile'
+    'uses' => 'UserController@getProfile'
 ]);
 
 Route::notFound([
-    'controller' => 'ErrorNotFoundController',
-    'method' => 'renderPage',
+    'uses' => 'ErrorNotFoundController@renderPage',
     'alias' => 'error-404'
 ]);
