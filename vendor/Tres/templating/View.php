@@ -6,6 +6,17 @@ namespace Tres\templating {
     
     class ViewException extends Exception {}
     
+    /*
+    |--------------------------------------------------------------------------
+    | View
+    |--------------------------------------------------------------------------
+    | 
+    | This class:
+    | - Allows to check if a view exists.
+    | - Gives the option to load a view.
+    | - Checks for expiration in case a view has to be recompiled.
+    | 
+    */
     class View {
         
         /**
@@ -83,10 +94,10 @@ namespace Tres\templating {
             $this->_content = ob_get_contents();
             ob_end_clean();
             
-            $this->_compiledFile = self::$storageDir.md5($this->_file);
+            $this->_compiledFile = self::$storageDir.md5($this->_file).'.php';
             
             if($this->_isExpired()){
-                if(!file_exists(self::$storageDir)){
+                if(!is_dir(self::$storageDir)){
                     mkdir(self::$storageDir, self::STORAGE_DIR_PERMISSIONS, true);
                 }
                 
@@ -94,45 +105,34 @@ namespace Tres\templating {
                 
                 if(is_writable(self::$storageDir)){
                     if($fileHandle = fopen($this->_compiledFile, 'w')){
-                        //chmod($file, self::VIEW_PERMISSIONS);
                         fwrite($fileHandle, $compiledContent);
                         fclose($fileHandle);
                     }
                 } else {
                     throw new ViewException('Cannot create/write to '.self::$storageDir.'. Permission denied.');
                 }
-            } else {
-                $this->_compiledFile = self::$storageDir.md5($this->_file);
             }
         }
-        
-        /**
-         * Displays the view.
-         */
-        // public function __destruct(){
-           // extract($this->_data);
-           // require_once($this->_compiledFile);
-        // }
         
         /**
          * Instantiates the class.
          * 
          * @param  string $view The URI of the view.
          * @param  array  $data The data to pass to the view.
-         * 
-         * @return Tres\templating\View To make method chaining available.
          */
         public static function make($view, array $data = array()){
             $static = new static($view, $data);
             
             extract($static->_data);
             require_once($static->_compiledFile);
+            
+            die();
         }
         
         /**
-         * Tells whether a file exists and is readable or not.
+         * Tells whether a view exists and is readable or not.
          * 
-         * @param  string $file The file.
+         * @param  string $file The view file.
          * @return bool
          */
         public static function exists($file){
