@@ -48,7 +48,6 @@ return [
     | 
     */
     'aliases' => [
-        'Asset'             => 'Tres\core\Asset',
         'Config'            => 'Tres\config\Config',
         'Database'          => 'Trestle\Database',
         'Mail'              => 'Tres\mailer\Mail',
