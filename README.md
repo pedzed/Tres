@@ -1,5 +1,7 @@
 # Tres Framework
 
+**This repository is obsolete. Please, go to [this repo](https://github.com/tres-framework/framework).**
+
 *Note: This is heavily in development. Codebase is unstable and may change
 at any time.*
 
